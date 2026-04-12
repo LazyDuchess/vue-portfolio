@@ -6,6 +6,7 @@
     hover
     :href="project.link"
     rel="noopener"
+    rounded="xl"
     target="_blank"
   >
     <div class="d-flex align-center">
@@ -18,8 +19,8 @@
       />
     </div>
     <div class="pa-4 d-flex flex-column justify-center">
-      <h3>{{ project.title }}</h3>
-      <p>{{ project.description }}</p>
+      <v-card-title>{{ project.title }}</v-card-title>
+      <v-card-text>{{ project.description }}</v-card-text>
     </div>
   </v-card>
 </template>

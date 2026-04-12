@@ -1,7 +1,42 @@
 <template>
-  <HelloWorld />
+  <v-container class="fill-height" max-width="900">
+    <h2 class="text-h5 font-weight-medium mb-3">
+      Posts
+    </h2>
+    <v-card
+      v-for="blog in blogs"
+      :key="blog.slug"
+      class="mb-4 pa-4 d-flex"
+      hover
+      rounded="xl"
+      :to="'blog/'+blog.slug"
+    >
+      <div class="d-flex align-center">
+        <v-img
+          v-if="blog.thumbnail"
+          class="rounded-l"
+          height="128"
+          :src="blog.thumbnail"
+          width="128"
+        />
+      </div>
+      <div class="pa-4 d-flex flex-column justify-center">
+        <v-card-title>{{ blog.title }}</v-card-title>
+        <v-card-subtitle>{{ blog.date }}</v-card-subtitle>
+        <v-card-text>{{ blog.description }}</v-card-text>
+      </div>
+    </v-card>
+  </v-container>
 </template>
 
 <script lang="ts" setup>
-  import HelloWorld from '@/components/HelloWorld.vue'
+  const blogs = [
+    {
+      title: 'Welcome to my Portfolio!',
+      date: 'April 12, 2026',
+      description: 'These are the fruits of finally sitting down and creating a Vuetify project. Yay!',
+      slug: 'welcome',
+      thumbnail: null,
+    },
+  ]
 </script>

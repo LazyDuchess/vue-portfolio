@@ -21,7 +21,7 @@
 
       <!-- Text -->
       <div class="text-body-2 mb-3 text-center">
-        Made with Vue by me :)
+        By Lazy Duchess. Made with Vuetify.
       </div>
 
       <!-- Social buttons -->

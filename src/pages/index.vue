@@ -21,7 +21,7 @@
         </h2>
 
         <p class="text-body-1">
-          Hi there! My name is Nahuel. Ever since I was a kid I had dreams of developing my own games, and I was fascinated by the modding communities that formed around games like Half-Life, The Sims and Grand Theft Auto, and the things people managed to achieve in closed source games.
+          Hi there! My name is Nahuel, I'm a programmer from Argentina. Ever since I was a kid I had dreams of developing my own games, and I was fascinated by the modding communities that formed around games like Half-Life, The Sims and Grand Theft Auto, and the things people managed to achieve in closed source games.
         </p>
 
         <p class="text-body-1">
@@ -39,6 +39,10 @@
 
         <p class="text-body-1">
           Nowadays, I've been getting more familiar with Godot, and learning a big deal about low level networking and server infrastructure with <a href="https://github.com/LazyDuchess/BombRushMP">All City Network</a>, an MMO multiplayer mod for Bomb Rush Cyberfunk.
+        </p>
+
+        <p class="text-body-1">
+          I made this website as well! I'm always looking to expand my horizons and try and learn new things.
         </p>
       </div>
     </div>
