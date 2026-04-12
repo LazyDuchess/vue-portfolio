@@ -10,7 +10,13 @@
           <span class="nav-underline" /></v-btn>
         <v-btn class="nav-btn" :ripple="false" to="/showcase" variant="plain">Showcase
           <span class="nav-underline" /></v-btn>
-        <v-btn class="nav-btn" :ripple="false" to="/blog" variant="plain">Blog
+        <v-btn
+          class="nav-btn"
+          :class="{ 'v-btn--active': $route.path.startsWith('/blog') }"
+          :ripple="false"
+          to="/blog"
+          variant="plain"
+        >Blog
           <span class="nav-underline" /></v-btn>
       </div>
     </v-app-bar>
