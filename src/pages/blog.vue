@@ -32,11 +32,18 @@
 <script lang="ts" setup>
   const blogs = [
     {
+      title: 'Compute shaders for better character customization',
+      date: 'April 13 2026',
+      description: 'Writing a custom morphing pipeline in Godot and Blender to increase body shape diversity and customization in characters.',
+      slug: 'godotcompute',
+      thumbnail: 'blog/godotcompute/thumb.gif',
+    },
+    {
       title: 'Writing a custom C# scheduler and serializer',
       date: 'April 12 2026',
-      description: 'Solving the problem of saving and loading coroutine state in C#, in an engine agnostic way.',
+      description: 'Solving the problem of saving and loading coroutine state in C#, in an elegant, engine-agnostic way.',
       slug: 'csharproutines',
-      thumbnail: null,
+      thumbnail: 'blog/csharp.png',
     },
   ]
 </script>
