@@ -7,6 +7,7 @@
 // Composables
 import { createRouter, createWebHistory } from 'vue-router'
 import Blog from '@/pages/blog.vue'
+import BlogPost from '@/pages/blogpost.vue'
 import Index from '@/pages/index.vue'
 import Showcase from '@/pages/showcase.vue'
 
@@ -27,7 +28,7 @@ const router = createRouter({
     },
     {
       path: '/blog/:slug',
-      component: Blog,
+      component: BlogPost,
     },
   ],
 })

@@ -1,0 +1,93 @@
+<template>
+  <v-container class="fill-height" max-width="900">
+    <div class="markdown" v-html="content" />
+  </v-container>
+  <div class="darken" :class="{ open: expandedImage != null }" @click="unexpand()" />
+</template>
+
+<script setup>
+  import MarkdownIt from 'markdown-it'
+  import { onMounted, ref } from 'vue'
+  import { useRoute } from 'vue-router'
+
+  const expandedImage = ref(null)
+
+  const route = useRoute()
+  const md = new MarkdownIt()
+
+  // load ALL markdown files
+  const files = import.meta.glob('../blog/*.md', {
+    as: 'raw',
+    eager: true,
+  })
+
+  const slug = route.params.slug
+
+  let content = '<h1>Whoops!</h1>Could not find that blog post. Sorry!'
+
+  for (const path in files) {
+    if (path.includes(slug)) {
+      content = md.render(files[path])
+    }
+  }
+
+  async function unexpand () {
+    if (expandedImage.value == null)
+      return
+    expandedImage.value.remove()
+    expandedImage.value = null
+  }
+
+  onMounted(() => {
+    for (const img of document.querySelectorAll('.markdown img')) {
+      img.addEventListener('click', () => {
+        if (expandedImage.value != null)
+          return
+        const newImg = img.cloneNode(false)
+        newImg.classList.add('markdownexpanded')
+        document.body.append(newImg)
+        expandedImage.value = newImg
+        newImg.addEventListener('click', () => {
+          expandedImage.value = null
+          newImg.remove()
+        })
+      })
+    }
+  })
+</script>
+
+<style>
+.markdown img {
+    max-width: 100%;
+    cursor: zoom-in;
+}
+
+.markdownexpanded {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  max-width: 90vw;
+  max-height: 90vh;
+  z-index: 5000;
+  cursor: zoom-out;
+}
+
+.darken {
+    z-index: 2000;
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 500%;
+    background-color: #000000;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.3s ease;
+}
+
+.darken.open {
+    pointer-events: auto;
+    opacity: 0.8;
+}
+</style>

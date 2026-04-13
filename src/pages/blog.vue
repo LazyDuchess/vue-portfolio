@@ -32,10 +32,10 @@
 <script lang="ts" setup>
   const blogs = [
     {
-      title: 'Welcome to my Portfolio!',
-      date: 'April 12, 2026',
-      description: 'These are the fruits of finally sitting down and creating a Vuetify project. Yay!',
-      slug: 'welcome',
+      title: 'Writing a custom C# scheduler and serializer',
+      date: 'April 12 2026',
+      description: 'Solving the problem of saving and loading coroutine state in C#, in an engine agnostic way.',
+      slug: 'csharproutines',
       thumbnail: null,
     },
   ]
