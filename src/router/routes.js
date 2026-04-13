@@ -18,6 +18,6 @@ export default [
 
   ...posts.map(post => ({
     path: `/blog/${post.slug}`,
-    component: () => import('@/pages/BlogPost.vue'),
+    component: () => import('@/pages/blogpost.vue'),
   })),
 ]
