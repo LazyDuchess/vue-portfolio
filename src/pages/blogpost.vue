@@ -34,7 +34,7 @@
     description: post.description,
     ogTitle: post.title,
     ogDescription: post.description,
-    ogImage: post.thumbnail,
+    ogImage: post.seoimage,
   })
 
   if (post) {

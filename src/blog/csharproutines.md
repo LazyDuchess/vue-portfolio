@@ -3,6 +3,7 @@ title: Writing a custom C# scheduler and serializer
 description: Solving the problem of saving and loading coroutine state in C#, in an elegant, engine-agnostic way.
 date: 2026-04-12
 thumbnail: blog/csharp.png
+seoimage: https://lazyduchess.online/log/csharp.png
 category: csharp
 ---
 
