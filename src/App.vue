@@ -2,7 +2,7 @@
   <v-app>
     <v-app-bar elevation="2">
       <v-app-bar-title class="font-weight-bold">
-        Nahuel
+        {{ titleName }}{{ flashCursor ? "_" : "" }}
       </v-app-bar-title>
 
       <div absolute class="center-wrapper">
@@ -74,7 +74,54 @@
 </template>
 
 <script lang="ts" setup>
-  //
+  import { onMounted, ref } from 'vue'
+
+  const title1 = 'Nahuel'
+  const title2 = 'Lazy Duchess'
+  const titleName = ref<string>(title1)
+  const flashCursor = ref<boolean>(true)
+  let titleStep = 0
+
+  onMounted(() => {
+    setInterval(() => {
+      flashCursor.value = titleStep != 0 && titleStep != 3 ? false : !flashCursor.value
+    }, 500)
+
+    setInterval(() => {
+      if (titleStep == 1) {
+        if (titleName.value.length > 0) {
+          titleName.value = titleName.value.slice(0, Math.max(0, titleName.value.length - 1))
+        } else {
+          titleStep = 2
+        }
+      } else if (titleStep == 2) {
+        if (titleName.value == title2) {
+          titleStep = 3
+        } else {
+          titleName.value += title2[titleName.value.length]
+        }
+      } else if (titleStep == 4) {
+        if (titleName.value.length > 0) {
+          titleName.value = titleName.value.slice(0, Math.max(0, titleName.value.length - 1))
+        } else {
+          titleStep = 5
+        }
+      } else if (titleStep == 5) {
+        if (titleName.value == title1) {
+          titleStep = 0
+        } else {
+          titleName.value += title1[titleName.value.length]
+        }
+      }
+    }, 50)
+
+    setInterval(() => {
+      if (titleStep == 0)
+        titleStep = 1
+      else if (titleStep == 3)
+        titleStep = 4
+    }, 5000)
+  })
 </script>
 
 <style scoped>
@@ -109,6 +156,8 @@
 
 .v-app-bar-title {
   color: var(--color-title);
+  font-family: "VT323", monospace;
+  font-size: 32px
 }
 
 .social {

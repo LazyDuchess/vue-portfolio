@@ -7,7 +7,7 @@
         </h1>
 
         <p class="text-subtitle-1 text-medium-emphasis">
-          Programming, reverse engineering and game development
+          Programming, reverse engineering, and game development
         </p>
 
         <p class="text-body-2 mt-2">
@@ -43,6 +43,23 @@
 
         <p class="text-body-1">
           I made this website as well! I'm always looking to expand my horizons and try and learn new things.
+        </p>
+
+        <h2 class="text-h5 font-weight-medium mb-3">
+          Skills
+        </h2>
+
+        <p class="text-body-1">
+          C# is my main and preferred language, but I'm also quite strong in C++ and know a fair bit of Javascript and Typescript for frontend web development.
+        </p>
+        <p class="text-body-1">
+          I'm very familiar with Unity and Godot, and a bunch of useful software like Blender and GIMP for asset creation.
+        </p>
+        <p class="text-body-1">
+          I'm also quite fond of Vue, which is the framework I made this website in!
+        </p>
+        <p class="text-body-1">
+          Check out the <a href="/showcase">Showcase</a> and <a href="/blog">Blog</a> sections of the page to see some of my projects and technical dives!
         </p>
       </div>
     </div>
