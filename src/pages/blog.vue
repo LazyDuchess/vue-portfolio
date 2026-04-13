@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-  import { useHead } from 'unhead'
+  import { useHead } from '@unhead/vue'
   import { useBlog } from '@/composables/useBlog'
 
   const { posts } = useBlog()

@@ -67,7 +67,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { useHead } from 'unhead'
+  import { useHead } from '@unhead/vue'
 
   useHead({
     title: 'Nahuel - Showcase',

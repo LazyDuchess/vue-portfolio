@@ -74,17 +74,27 @@
 </template>
 
 <script lang="ts" setup>
-  import { useHead } from 'unhead'
+  import { useHead } from '@unhead/vue'
   import { onMounted, ref } from 'vue'
 
   useHead({
-    title: 'Nahuel - Showcase',
-    meta: [
-      {
-        property: 'og:title',
-        content: 'Nahuel - Showcase',
+    bodyAttrs: {
+      // use strings
+      style: 'background-color: #343434',
+      // arrays
+      class: ['dark', 'overflow'],
+    },
+    htmlAttrs: {
+      // objects
+      style: {
+        backgroundColor: 'white',
+        color: 'black',
       },
-    ],
+      // computed boolean objects
+      class: {
+        dark: () => Date.now() % 2 === 0,
+      },
+    },
   })
 
   const title1 = 'Nahuel'
