@@ -1,6 +1,9 @@
 <template>
   <v-container class="fill-height" max-width="900">
     <div>
+      <p class="text-subtitle-1 text-medium-emphasis">
+        Check out my work!
+      </p>
       <h2 class="text-h5 font-weight-medium mb-3">
         Modding and Reverse Engineering
       </h2>

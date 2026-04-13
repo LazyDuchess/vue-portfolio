@@ -3,6 +3,9 @@
     <h2 class="text-h5 font-weight-medium mb-3">
       Posts
     </h2>
+    <p class="text-subtitle-1 text-medium-emphasis">
+      Technical deep dives into what I've worked on.
+    </p>
     <v-card
       v-for="post in posts"
       :key="post.slug"
