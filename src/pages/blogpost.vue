@@ -9,27 +9,22 @@
   import MarkdownIt from 'markdown-it'
   import { onMounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
+  import { useBlog } from '@/composables/useBlog'
+
+  const { getPostBySlug } = useBlog()
 
   const expandedImage = ref(null)
 
   const route = useRoute()
   const md = new MarkdownIt()
 
-  // load ALL markdown files
-  const files = import.meta.glob('../blog/*.md', {
-    as: 'raw',
-    eager: true,
-  })
-
   const slug = route.params.slug
 
   let content = '<h1>Whoops!</h1>Could not find that blog post. Sorry!'
 
-  for (const path in files) {
-    if (path.includes(slug)) {
-      content = md.render(files[path])
-    }
-  }
+  const post = getPostBySlug(slug)
+  document.title = post.title
+  content = md.render(post.content)
 
   async function unexpand () {
     if (expandedImage.value == null)

@@ -1,3 +1,11 @@
+---
+title: Writing a custom C# scheduler and serializer
+description: Solving the problem of saving and loading coroutine state in C#, in an elegant, engine-agnostic way.
+date: 2026-04-13
+thumbnail: blog/csharp.png
+category: csharp
+---
+
 # Writing a custom C# routine scheduler and serializer
 
 ## The problem

@@ -11,6 +11,12 @@ import BlogPost from '@/pages/blogpost.vue'
 import Index from '@/pages/index.vue'
 import Showcase from '@/pages/showcase.vue'
 
+declare module 'vue-router' {
+  interface RouteMeta {
+    title?: string
+  }
+}
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -31,6 +37,10 @@ const router = createRouter({
       component: BlogPost,
     },
   ],
+})
+
+router.afterEach(to => {
+  document.title = to.meta.title || 'Nahuel - Portfolio'
 })
 
 export default router
