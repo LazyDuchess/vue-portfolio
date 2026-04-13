@@ -67,15 +67,17 @@
 </template>
 
 <script lang="ts" setup>
-  import { useHead } from '@unhead/vue'
+  import { useHead, useSeoMeta } from '@unhead/vue'
 
   useHead({
-    title: 'Nahuel - Showcase',
-    meta: [
-      {
-        property: 'og:title',
-        content: 'Nahuel - Showcase',
-      },
-    ],
+    title: 'Nahuel - About Me',
   })
+
+  useSeoMeta({
+    title: 'Nahuel - About Me',
+    description: 'Programming, reverse engineering and game development projects.',
+    ogTitle: 'Nahuel - Portfolio',
+    ogDescription: 'Programming, reverse engineering and game development projects.',
+  })
+
 </script>

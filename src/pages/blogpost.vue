@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-  import { useHead } from '@unhead/vue'
+  import { useHead, useSeoMeta } from '@unhead/vue'
   import MarkdownIt from 'markdown-it'
   import { onMounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
@@ -25,14 +25,16 @@
 
   const post = getPostBySlug(slug)
 
-    useHead({
-    title: 'Nahuel - Showcase',
-    meta: [
-      {
-        property: 'og:title',
-        content: 'Nahuel - Showcase',
-      },
-    ],
+  useHead({
+    title: post.title,
+  })
+
+  useSeoMeta({
+    title: post.title,
+    description: post.description,
+    ogTitle: post.title,
+    ogDescription: post.description,
+    ogImage: post.thumbnail,
   })
 
   if (post) {

@@ -37,8 +37,20 @@
 </template>
 
 <script lang="ts" setup>
-  import { useHead } from '@unhead/vue'
+  import { useHead, useSeoMeta } from '@unhead/vue'
   import ShowcaseProject from '@/components/ShowcaseProject.vue'
+
+  useHead({
+    title: 'Nahuel - Showcase',
+  })
+
+  useSeoMeta({
+    title: 'Nahuel - Showcase',
+    description: 'Programming, reverse engineering and game development projects.',
+    ogTitle: 'Nahuel - Showcase',
+    ogDescription: 'Programming, reverse engineering and game development projects.',
+  })
+
   const projects = [
     {
       title: 'OpenTS2',
@@ -90,14 +102,4 @@
       thumbnail: 'showcase/otr.png',
     },
   ]
-
-  useHead({
-    title: 'Nahuel - Showcase',
-    meta: [
-      {
-        property: 'og:title',
-        content: 'Nahuel - Showcase',
-      },
-    ],
-  })
 </script>

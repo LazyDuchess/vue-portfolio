@@ -33,18 +33,19 @@
 </template>
 
 <script setup>
-  import { useHead } from '@unhead/vue'
+  import { useHead, useSeoMeta } from '@unhead/vue'
   import { useBlog } from '@/composables/useBlog'
 
   const { posts } = useBlog()
 
   useHead({
-    title: 'Nahuel - Showcase',
-    meta: [
-      {
-        property: 'og:title',
-        content: 'Nahuel - Showcase',
-      },
-    ],
+    title: 'Nahuel - Blog',
+  })
+
+  useSeoMeta({
+    title: 'Nahuel - Blog',
+    description: 'Programming, reverse engineering and game development projects.',
+    ogTitle: 'Nahuel - Blog',
+    ogDescription: 'Programming, reverse engineering and game development projects.',
   })
 </script>
