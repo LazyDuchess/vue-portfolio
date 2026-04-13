@@ -37,7 +37,7 @@
 </template>
 
 <script lang="ts" setup>
-  import { useHead } from '@vueuse/head'
+  import { useHead } from '@unhead/vue'
   import ShowcaseProject from '@/components/ShowcaseProject.vue'
   const projects = [
     {

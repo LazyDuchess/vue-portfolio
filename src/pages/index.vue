@@ -67,14 +67,14 @@
 </template>
 
 <script lang="ts" setup>
-  import { useHead } from '@vueuse/head'
+  import { useHead } from '@unhead/vue'
 
   useHead({
-    title: 'Nahuel - Home',
+    title: 'Nahuel - Showcase',
     meta: [
       {
         property: 'og:title',
-        content: 'Nahuel - Home',
+        content: 'Nahuel - Showcase',
       },
     ],
   })

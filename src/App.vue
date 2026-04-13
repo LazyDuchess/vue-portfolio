@@ -74,7 +74,28 @@
 </template>
 
 <script lang="ts" setup>
+  import { useHead } from '@unhead/vue'
   import { onMounted, ref } from 'vue'
+
+  useHead({
+    bodyAttrs: {
+      // use strings
+      style: 'background-color: #343434',
+      // arrays
+      class: ['dark', 'overflow'],
+    },
+    htmlAttrs: {
+      // objects
+      style: {
+        backgroundColor: 'white',
+        color: 'black',
+      },
+      // computed boolean objects
+      class: {
+        dark: () => Date.now() % 2 === 0,
+      },
+    },
+  })
 
   const title1 = 'Nahuel'
   const title2 = 'Lazy Duchess'

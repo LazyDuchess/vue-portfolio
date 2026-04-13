@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-  import { useHead } from '@vueuse/head'
+  import { useHead } from '@unhead/vue'
   import MarkdownIt from 'markdown-it'
   import { onMounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
@@ -25,28 +25,17 @@
 
   const post = getPostBySlug(slug)
 
-  if (post) {
     useHead({
-      title: post.title,
-      meta: [
-        {
-          property: 'og:title',
-          content: post.title,
-        },
-        {
-          property: 'og:description',
-          content: post.description,
-        },
-        {
-          property: 'og:image',
-          content: post.thumbnail,
-        },
-        {
-          property: 'og:type',
-          content: 'article',
-        },
-      ],
-    })
+    title: 'Nahuel - Showcase',
+    meta: [
+      {
+        property: 'og:title',
+        content: 'Nahuel - Showcase',
+      },
+    ],
+  })
+
+  if (post) {
     content = md.render(post.content)
   }
 

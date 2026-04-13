@@ -50,9 +50,6 @@ export default defineConfig({
   ssr: {
     noExternal: ['vuetify'],
   },
-  build: {
-    cssCodeSplit: false,
-  },
   ssgOptions: {
     dirStyle: 'nested',
   },
