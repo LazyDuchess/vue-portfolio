@@ -67,5 +67,15 @@
 </template>
 
 <script lang="ts" setup>
-  //
+  import { useHead } from '@vueuse/head'
+
+  useHead({
+    title: 'Nahuel - Home',
+    meta: [
+      {
+        property: 'og:title',
+        content: 'Nahuel - Home',
+      },
+    ],
+  })
 </script>

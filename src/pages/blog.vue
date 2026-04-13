@@ -33,7 +33,18 @@
 </template>
 
 <script setup>
+  import { useHead } from '@vueuse/head'
   import { useBlog } from '@/composables/useBlog'
 
   const { posts } = useBlog()
+
+  useHead({
+    title: 'Nahuel - Blog',
+    meta: [
+      {
+        property: 'og:title',
+        content: 'Nahuel - Blog',
+      },
+    ],
+  })
 </script>

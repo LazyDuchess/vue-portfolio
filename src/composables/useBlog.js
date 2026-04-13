@@ -37,7 +37,6 @@ const posts = Object.entries(files).map(([path, raw]) => {
   }
 })
 
-// optional: sort once globally
 posts.sort((a, b) => new Date(b.date) - new Date(a.date))
 
 export function useBlog () {

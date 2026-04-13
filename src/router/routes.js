@@ -1,3 +1,7 @@
+import { useBlog } from '@/composables/useBlog'
+
+const { posts } = useBlog()
+
 export default [
   {
     path: '/',
@@ -11,8 +15,9 @@ export default [
     path: '/showcase',
     component: () => import('@/pages/showcase.vue'),
   },
-  {
-    path: '/blog/:slug',
-    component: () => import('@/pages/blogpost.vue'),
-  },
+
+  ...posts.map(post => ({
+    path: `/blog/${post.slug}`,
+    component: () => import('@/pages/BlogPost.vue'),
+  })),
 ]

@@ -37,6 +37,7 @@
 </template>
 
 <script lang="ts" setup>
+  import { useHead } from '@vueuse/head'
   import ShowcaseProject from '@/components/ShowcaseProject.vue'
   const projects = [
     {
@@ -89,4 +90,14 @@
       thumbnail: 'showcase/otr.png',
     },
   ]
+
+  useHead({
+    title: 'Nahuel - Showcase',
+    meta: [
+      {
+        property: 'og:title',
+        content: 'Nahuel - Showcase',
+      },
+    ],
+  })
 </script>

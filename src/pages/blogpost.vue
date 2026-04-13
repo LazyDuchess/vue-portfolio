@@ -6,6 +6,7 @@
 </template>
 
 <script setup>
+  import { useHead } from '@vueuse/head'
   import MarkdownIt from 'markdown-it'
   import { onMounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
@@ -18,13 +19,36 @@
   const route = useRoute()
   const md = new MarkdownIt()
 
-  const slug = route.params.slug
+  const slug = route.path.split('/').pop()
 
   let content = '<h1>Whoops!</h1>Could not find that blog post. Sorry!'
 
   const post = getPostBySlug(slug)
-  document.title = post.title
-  content = md.render(post.content)
+
+  if (post) {
+    useHead({
+      title: post.title,
+      meta: [
+        {
+          property: 'og:title',
+          content: post.title,
+        },
+        {
+          property: 'og:description',
+          content: post.description,
+        },
+        {
+          property: 'og:image',
+          content: post.thumbnail,
+        },
+        {
+          property: 'og:type',
+          content: 'article',
+        },
+      ],
+    })
+    content = md.render(post.content)
+  }
 
   async function unexpand () {
     if (expandedImage.value == null)

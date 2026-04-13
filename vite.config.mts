@@ -47,4 +47,10 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  ssr: {
+    noExternal: ['vuetify'],
+  },
+  build: {
+    cssCodeSplit: false,
+  },
 })
