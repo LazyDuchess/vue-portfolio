@@ -3,21 +3,18 @@
   "private": true,
   "type": "module",
   "version": "0.0.0",
-  "scripts": {
-    "dev": "vite",
-    "build": "run-p type-check \"build-only {@}\" --",
-    "preview": "vite preview",
+  "scripts": {  
+   "dev": "vite",
+    "build": "vite-ssg build",
     "build-only": "vite build",
-    "type-check": "vue-tsc --build --force",
-    "mcp": "ruler apply",
-    "mcp:revert": "ruler revert",
-    "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "preview": "vite preview",
+    "type-check": "vue-tsc --build --force"
   },
   "dependencies": {
     "@fontsource/roboto": "^5.2.10",
     "@mdi/font": "7.4.47",
     "markdown-it": "^14.1.1",
+    "vite-ssg": "^28.3.0",
     "vue": "^3.5.30",
     "vue-router": "^5.0.3",
     "vuetify": "^4.0.2"
