@@ -61,7 +61,7 @@
     },
     {
       title: 'All City Network',
-      description: 'An MMO-like Multiplayer mod for Bomb Rush Cyberfunk, developed using Unity and the LiteNetLib netowrking library.',
+      description: 'An MMO-like Multiplayer mod for Bomb Rush Cyberfunk, developed using Unity and the LiteNetLib networking library.',
       link: 'https://github.com/LazyDuchess/BombRushMP',
       category: 'unity',
       thumbnail: 'showcase/acnthumb.png',
@@ -96,7 +96,7 @@
     },
     {
       title: 'Off The Record Patch',
-      description: 'A patch for Dead Rising 2: Off The Record that fixes a lot of issues with its pc port - such as stability, bugs, framerate issues and fixes native controller support. DLL Hook written in C++ and x86 assembly.',
+      description: 'A patch for Dead Rising 2: Off The Record that fixes a lot of issues with its PC port - such as stability, bugs, framerate issues and fixes native controller support. DLL Hook written in C++ and x86 assembly.',
       link: 'https://github.com/LazyDuchess/OffTheRecordPatch',
       category: 'mod',
       thumbnail: 'showcase/otr.png',
