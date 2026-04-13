@@ -6,7 +6,7 @@
 </template>
 
 <script setup>
-  import { useHead } from '@unhead/vue'
+  import { useHead } from 'unhead'
   import MarkdownIt from 'markdown-it'
   import { onMounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
