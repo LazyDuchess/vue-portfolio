@@ -16,7 +16,4 @@ export const createApp = ViteSSG(
     app.use(head)
     registerPlugins(app)
   },
-  {
-    format: 'directory',
-  },
 )

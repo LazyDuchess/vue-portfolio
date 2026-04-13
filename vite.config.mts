@@ -53,4 +53,7 @@ export default defineConfig({
   build: {
     cssCodeSplit: false,
   },
+  ssgOptions: {
+    dirStyle: 'nested',
+  },
 })
