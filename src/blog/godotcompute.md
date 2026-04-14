@@ -35,13 +35,13 @@ So, first thing that comes to mind are UV Maps. In Blender it's relatively easy 
 
 This is the UV Map that I had created for texturing:
 
-[](/blog/godotcompute/uv1.png)
+![](/blog/godotcompute/uv1.png)
 
 I'm honestly very proud of it - looks pretty, very neatly arranged in my programmer opinion. I could definitely work with this, just make the texture way smaller and increase the size of the morphable areas, like the face and body, to have the best morph resolution possible.
 
 This was the result of that:
 
-[](/blog/godotcompute/uv2.png)
+![](/blog/godotcompute/uv2.png)
 
 It's basically just a more compact version of the main UV, with some bits like the eyeballs, teeth and tongue removed as we are not going to be morphing those.
 
@@ -49,15 +49,15 @@ So this is now the second UV Map, which will be used for morphs.
 
 For the next step, using Blender's beautiful Python API, I wrote a couple of scripts that will grab the vertex deltas for all shape keys in the selected object, and encode and bake them into RGB vertex colors. As an example, here is what the encoding for the Masculine frame morph looks like:
 
-[](/blog/godotcompute/vcol.png)
+![](/blog/godotcompute/vcol.png)
 
 Logically the strongest colors are around the breasts, as they are drastically flattened to achieve the masculine frame.
 
 After that, it was down to creating a little Material using Blender nodes, that will output the vertex colors as a Diffuse shader, and bake them into a texture. So this is what the resulting final morph texture looks like:
 
-[](/blog/godotcompute/sktex.png)
+![](/blog/godotcompute/sktex.png)
 
-Finally, just to test everything is OK, I wrote another little script that converts the output texture back into a shape key. Indeed, it worked fantastic, and there was virtually no difference between the texture based morph and the original shape key.
+Just to test everything is OK, I wrote another little script that converts the output texture back into a shape key. Indeed, it worked fantastic, and there was virtually no difference between the texture based morph and the original shape key.
 
 Finally it was time to write a normal delta converter. I won't bore you with the details - it's the same as the vertex morph texture, just with normal differences rather than vertex position ones.
 
@@ -67,17 +67,17 @@ Now, it was about time to test it in-engine.
 
 In order to be able to test it quickly, I made a very rough, quick and dirty implementation in pure C#:
 
-[](/blog/godotcompute/draft1.png)
+![](/blog/godotcompute/draft1.png)
 
 No optimization to speak of in that code. All it did was sample the deltas in each loaded morph texture and add them as blendshapes to the character's mesh.
 
 It worked perfect though:
 
-[](/blog/godotcompute/godot1.png)
+![](/blog/godotcompute/godot1.png)
 
 Well, minus the fact that it takes forever to generate, and a number of odd tears in the mesh, where the UV seams are:
 
-[](/blog/godotcompute/godot2.png)
+![](/blog/godotcompute/godot2.png)
 
 These gaps appear because, unlike in Blender, in most 3D engines and in the GPU itself vertices can't have multiple sets of UV coordinates and other attributes. So at export time, meshes are split wherever there are normal or UV seams present. Combined with the imprecisions of sampling the pixels at different areas, these gaps are created.
 
@@ -85,11 +85,11 @@ The solution seemed pretty straightforward to me - simply make a Blender script 
 
 After some quick python code, here is the final Morph UV Map:
 
-[](/blog/godotcompute/uv3.png)
+![](/blog/godotcompute/uv3.png)
 
 It's not pretty, but due to the fact that we are using it as a per-vertex morph map rather than sampling it as a texture with linear interpolation across triangles all the stretching really doesn't matter. All that matters are the positions of the vertices themselves!
 
-[](/blog/godotcompute/nogaps.png)
+![](/blog/godotcompute/nogaps.png)
 
 There we go!
 
@@ -109,7 +109,7 @@ So yeah, I bit the bullet, and went on to do research on compute shaders.
 
 So, off I went to check the docs and...
 
-[](/blog/godotcompute/docs1.png)
+![](/blog/godotcompute/docs1.png)
 
 They are shockingly low-level compared to regular vertex and fragment shaders. There is a ton of manual memory management involved, uploading buffers to the GPU then downloading them back, packing data and creating byte buffers in the most efficient way possible. It was going to be quite the challenge.
 
@@ -117,13 +117,13 @@ I ended up settling on a system where, for each mesh that is used by the system,
 
 The **HardwareMeshOutput** dies when the mesh instance is removed from the scene tree, while the **HardwareMeshCache** is C# WeakRef'd by the **MorphManager** class, so we avoid memory leaks by getting rid of these caches as the meshes are no longer used and memory pressure increases.
 
-[Memory management goes brrrr](/blog/godotcompute/mem1.png)
+![Memory management goes brrrr](/blog/godotcompute/mem1.png)
 
 The **MorphManager** itself is the sort of "global orchestrator" class - When a mesh wants to use morph maps, they send a list of the ID of each morph used to the class singleton instance, it manages loading the appropriate morph maps and uploading them to the GPU, makes instances of the hardware caches if they do not exist already, and then sets up the compute shader to run.
 
 Speaking of, the compute shader itself is relatively simple:
 
-[](/blog/godotcompute/glsl1.png)
+![](/blog/godotcompute/glsl1.png)
 
 It simply iterates through the morph maps on each vertex and applies them based on a weight buffer. It's pretty fast!
 
@@ -131,11 +131,11 @@ So the shader itself really was the easy part, it's all the orchestration that t
 
 And, finally, after putting everything together...
 
-[Good lord...](/blog/godotcompute/bug.png)
+![Good lord...](/blog/godotcompute/bug.png)
 
 I mean... it happens, I guess. Especially when learning something new. This was just a result of me trying to be clever and doing weird stuff in the name of optimization that the GPU really didn't like.
 
-[It works!](/blog/godotcompute/morphresult.png)
+![It works!](/blog/godotcompute/morphresult.png)
 
 There we go! This is about 5 meshes total (Feet, Legs, Torso, Hands, Head) all randomizing its gender morph map to different values on a key press, in real time! All texture based - no blend shapes!
 
@@ -149,34 +149,34 @@ The hard part is now over, the system works, so now it's time to move on to actu
 
 For this purpose, I made a quick little dress shirt in blender:
 
-[](/blog/godotcompute/shirt.png)
+![](/blog/godotcompute/shirt.png)
 
 So, after transferring skin weights and UV Maps from the base character model, it works!
 
-[](/blog/godotcompute/shirtgodot1.png)
+![](/blog/godotcompute/shirtgodot1.png)
 
 However, a key detail is that clothes aren't skin tight, so the same morph texture as the body doesn't work quite well for the shirt. You can see that especially around the cleavage/breast area, since unlike the body mesh the clothing mesh sort of "hangs loose" the result looks all kinds of messed up.
 
 For this purpose, I created a "loose" version of the base mesh, exclusively for creating morphs:
 
-[](/blog/godotcompute/loosemesh1.png)
-[](/blog/godotcompute/loosemesh2.png)
+![](/blog/godotcompute/loosemesh1.png)
+![](/blog/godotcompute/loosemesh2.png)
 
 It's not super different - It mostly comes down to making the breast shape less pronounced, plus smoothing out some other details like the shoulders and muscles.
 
 Since some clothes can have parts that are tighter than others, instead of being a binary choice between tight or loose I decided to color code it via the vertex color channel.
 
-[](/blog/godotcompute/paint.png)
+![](/blog/godotcompute/paint.png)
 
 So in the red channel we encode how much the mesh should use the loose version of the morphs. In the case of the shirt it's fully red, but in other outfits like, say, wet suits and such you would probably want to blend it at key areas instead.
 
 Now, every MorphMap resource in Godot can have a loose variant:
 
-[](/blog/godotcompute/res.png)
+![](/blog/godotcompute/res.png)
 
 After hooking it all up, it works fantastic!
 
-[](/blog/godotcompute/final.png)
+![](/blog/godotcompute/final.png)
 
 So yeah, this is where i left it off. I'm sure there are still way more optimizations I could do, like packing all the morph variants and normals into a singular texture for massive gains, but after all the work thsi took I was done for now.
 
