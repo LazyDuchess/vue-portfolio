@@ -135,7 +135,7 @@ And, finally, after putting everything together...
 
 I mean... it happens, I guess. Especially when learning something new. This was just a result of me trying to be clever and doing weird stuff in the name of optimization that the GPU really didn't like.
 
-![It works!](/blog/godotcompute/morphresult.png)
+![It works!](/blog/godotcompute/morphresult.gif)
 
 There we go! This is about 5 meshes total (Feet, Legs, Torso, Hands, Head) all randomizing its gender morph map to different values on a key press, in real time! All texture based - no blend shapes!
 

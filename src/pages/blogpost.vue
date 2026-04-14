@@ -69,6 +69,7 @@
 <style>
 .markdown img {
     max-width: 100%;
+    max-height: 512px;
     cursor: zoom-in;
 }
 
