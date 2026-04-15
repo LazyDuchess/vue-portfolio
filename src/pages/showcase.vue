@@ -52,6 +52,7 @@
     description: appContext.config.globalProperties.$description,
     ogTitle: `Showcase - ${appContext.config.globalProperties.$title}`,
     ogDescription: appContext.config.globalProperties.$description,
+    ogImage: 'https://lazyduchess.online/seoicon.png',
   })
 
   const projects = [

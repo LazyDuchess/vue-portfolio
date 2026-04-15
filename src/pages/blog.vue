@@ -60,6 +60,7 @@
     description: appContext.config.globalProperties.$description,
     ogTitle: `Blog - ${appContext.config.globalProperties.$title}`,
     ogDescription: appContext.config.globalProperties.$description,
+    ogImage: 'https://lazyduchess.online/seoicon.png',
   })
 </script>
 
