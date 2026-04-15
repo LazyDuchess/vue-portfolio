@@ -12,7 +12,7 @@
     <div class="d-flex align-center">
       <v-img
         v-if="project.thumbnail"
-        class="rounded-l"
+        class="rounded-xl"
         height="128"
         :src="project.thumbnail"
         width="128"
