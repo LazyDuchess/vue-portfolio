@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <v-app-bar elevation="2">
-      <template v-if="!$vuetify.display.smAndUp" v-slot:prepend>
-        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <template v-if="!$vuetify.display.smAndUp" #prepend>
+        <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       </template>
       <v-app-bar-title class="font-weight-bold">
         {{ titleName }}{{ flashCursor ? "_" : "" }}
@@ -24,6 +24,27 @@
         </div>
       </template>
     </v-app-bar>
+    <template v-if="!$vuetify.display.smAndUp">
+      <v-navigation-drawer
+        v-model="drawer"
+        temporary
+      >
+        <v-list class="flex-grow-1 overflow-y-auto" density="compact">
+          <v-list-item
+            v-for="item in items"
+            :key="item.title"
+            :active="item.route == '/' ? $route.path == '/' : $route.path.startsWith(item.route)"
+            class="navitem"
+            link
+            :to="item.route"
+          >
+            <v-list-item-title>
+              {{ item.title }}
+            </v-list-item-title>
+          </v-list-item>
+        </v-list>
+      </v-navigation-drawer>
+    </template>
     <v-main>
       <router-view />
     </v-main>
@@ -79,7 +100,29 @@
 
 <script lang="ts" setup>
   import { useHead, useSeoMeta } from '@unhead/vue'
-  import { onMounted, ref } from 'vue'
+  import { onMounted, ref, watch } from 'vue'
+
+  const items = [
+    {
+      title: 'Home',
+      route: '/',
+    },
+    {
+      title: 'Showcase',
+      route: '/showcase',
+    },
+    {
+      title: 'Blog',
+      route: '/blog',
+    },
+  ]
+
+  const drawer = ref(false)
+  const group = ref(null)
+
+  watch(group, () => {
+    drawer.value = false
+  })
 
   useHead({
     title: 'Nahuel - Portfolio',
@@ -141,6 +184,10 @@
 </script>
 
 <style scoped>
+
+.navitem.v-list-item--active {
+  color: var(--color-accent);
+}
 
 .center-wrapper {
   position: absolute;
