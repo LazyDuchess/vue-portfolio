@@ -8,9 +8,11 @@
 <script setup>
   import { useHead, useSeoMeta } from '@unhead/vue'
   import MarkdownIt from 'markdown-it'
-  import { onMounted, ref } from 'vue'
+  import { getCurrentInstance, onMounted, ref } from 'vue'
   import { useRoute } from 'vue-router'
   import { useBlog } from '@/composables/useBlog'
+
+  const { appContext } = getCurrentInstance()
 
   const { getPostBySlug } = useBlog()
 
@@ -26,13 +28,13 @@
   const post = getPostBySlug(slug)
 
   useHead({
-    title: post.title,
+    title: `${post.title} - ${appContext.config.globalProperties.$title}`,
   })
 
   useSeoMeta({
-    title: post.title,
+    title: `${post.title} - ${appContext.config.globalProperties.$title}`,
     description: post.description,
-    ogTitle: post.title,
+    ogTitle: `${post.title} - ${appContext.config.globalProperties.$title}`,
     ogDescription: post.description,
     ogImage: post.seoimage,
   })

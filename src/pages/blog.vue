@@ -42,19 +42,22 @@
 
 <script setup>
   import { useHead, useSeoMeta } from '@unhead/vue'
+  import { getCurrentInstance } from 'vue'
   import { useBlog } from '@/composables/useBlog'
+
+  const { appContext } = getCurrentInstance()
 
   const { posts } = useBlog()
 
   useHead({
-    title: 'Nahuel - Blog',
+    title: `Blog - ${appContext.config.globalProperties.$title}`,
   })
 
   useSeoMeta({
-    title: 'Nahuel - Blog',
-    description: 'Programming, reverse engineering and game development projects.',
-    ogTitle: 'Nahuel - Blog',
-    ogDescription: 'Programming, reverse engineering and game development projects.',
+    title: `Blog - ${appContext.config.globalProperties.$title}`,
+    description: appContext.config.globalProperties.$description,
+    ogTitle: `Blog - ${appContext.config.globalProperties.$title}`,
+    ogDescription: appContext.config.globalProperties.$description,
   })
 </script>
 

@@ -38,17 +38,20 @@
 
 <script lang="ts" setup>
   import { useHead, useSeoMeta } from '@unhead/vue'
+  import { getCurrentInstance } from 'vue'
   import ShowcaseProject from '@/components/ShowcaseProject.vue'
 
+  const { appContext } = getCurrentInstance()
+
   useHead({
-    title: 'Nahuel - Showcase',
+    title: `Showcase - ${appContext.config.globalProperties.$title}`,
   })
 
   useSeoMeta({
-    title: 'Nahuel - Showcase',
-    description: 'Programming, reverse engineering and game development projects.',
-    ogTitle: 'Nahuel - Showcase',
-    ogDescription: 'Programming, reverse engineering and game development projects.',
+    title: `Showcase - ${appContext.config.globalProperties.$title}`,
+    description: appContext.config.globalProperties.$description,
+    ogTitle: `Showcase - ${appContext.config.globalProperties.$title}`,
+    ogDescription: appContext.config.globalProperties.$description,
   })
 
   const projects = [

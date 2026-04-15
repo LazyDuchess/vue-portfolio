@@ -68,16 +68,19 @@
 
 <script lang="ts" setup>
   import { useHead, useSeoMeta } from '@unhead/vue'
+  import { getCurrentInstance } from 'vue'
+
+  const { appContext } = getCurrentInstance()
 
   useHead({
-    title: 'Nahuel - About Me',
+    title: `Home - ${appContext.config.globalProperties.$title}`,
   })
 
   useSeoMeta({
-    title: 'Nahuel - About Me',
-    description: 'Programming, reverse engineering and game development projects.',
-    ogTitle: 'Nahuel - Portfolio',
-    ogDescription: 'Programming, reverse engineering and game development projects.',
+    title: `Home - ${appContext.config.globalProperties.$title}`,
+    description: appContext.config.globalProperties.$description,
+    ogTitle: `Home - ${appContext.config.globalProperties.$title}`,
+    ogDescription: appContext.config.globalProperties.$description,
   })
 
 </script>
