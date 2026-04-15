@@ -192,7 +192,7 @@
 <style scoped>
 
 .v-main{
-  min-height: calc(100vh - 132px);
+  min-height: calc(100dvh - 132px);
 }
 
 .navitem.v-list-item--active {
