@@ -23,10 +23,18 @@
           width="128"
         />
       </div>
-      <div class="pa-4 d-flex flex-column justify-center">
+      <div class="pa-4 d-flex flex-column justify-center align-start">
         <v-card-title>{{ post.title }}</v-card-title>
-        <v-card-subtitle>{{ post.date }}</v-card-subtitle>
+        <v-card-subtitle>{{ new Date(post.date).toDateString() }}</v-card-subtitle>
         <v-card-text>{{ post.description }}</v-card-text>
+        <div class="d-flex flex-wrap">
+          <v-chip
+            v-for="category in post.categories"
+            class="category"
+          >
+            {{ category }}
+          </v-chip>
+        </div>
       </div>
     </v-card>
   </v-container>
@@ -49,3 +57,15 @@
     ogDescription: 'Programming, reverse engineering and game development projects.',
   })
 </script>
+
+<style>
+.category {
+  color: rgb(88, 35, 68);
+  outline: 2px solid rgb(122, 67, 101);
+  font-size: 12px;
+  margin-left: 16px;
+}
+.category .v-chip__content {
+  color: rgb(207, 207, 207);
+}
+</style>

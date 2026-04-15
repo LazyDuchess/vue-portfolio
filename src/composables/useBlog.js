@@ -30,10 +30,13 @@ const posts = Object.entries(files).map(([path, raw]) => {
 
   const slug = path.split('/').pop().replace('.md', '')
 
+  const categories = data.category.split(' ')
+
   return {
     slug,
     ...data,
     content,
+    categories,
   }
 })
 
