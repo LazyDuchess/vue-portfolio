@@ -15,6 +15,10 @@ export default [
     path: '/showcase',
     component: () => import('@/pages/showcase.vue'),
   },
+  {
+    path: '/contact',
+    component: () => import('@/pages/contact.vue'),
+  },
 
   ...posts.map(post => ({
     path: `/blog/${post.slug}`,

@@ -1,13 +1,13 @@
 <template>
   <v-app>
     <v-app-bar elevation="2">
-      <template v-if="!$vuetify.display.smAndUp" #prepend>
+      <template v-if="!$vuetify.display.mdAndUp" #prepend>
         <v-app-bar-nav-icon @click.stop="drawer = !drawer" />
       </template>
       <v-app-bar-title class="font-weight-bold">
         {{ titleName }}{{ flashCursor ? "_" : "" }}
       </v-app-bar-title>
-      <template v-if="$vuetify.display.smAndUp">
+      <template v-if="$vuetify.display.mdAndUp">
         <div absolute class="center-wrapper">
           <v-btn class="nav-btn" :ripple="false" to="/" variant="plain">Home
             <span class="nav-underline" /></v-btn>
@@ -21,10 +21,12 @@
             variant="plain"
           >Blog
             <span class="nav-underline" /></v-btn>
+          <v-btn class="nav-btn" :ripple="false" to="/contact" variant="plain">Contact
+            <span class="nav-underline" /></v-btn>
         </div>
       </template>
     </v-app-bar>
-    <template v-if="!$vuetify.display.smAndUp">
+    <template v-if="!$vuetify.display.mdAndUp">
       <v-navigation-drawer
         v-model="drawer"
         temporary
@@ -114,6 +116,10 @@
     {
       title: 'Blog',
       route: '/blog',
+    },
+    {
+      title: 'Contact',
+      route: '/contact',
     },
   ]
 

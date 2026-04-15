@@ -11,7 +11,7 @@
         </p>
 
         <p class="text-body-2 mt-2">
-          Also known as <strong>Lazy Duchess</strong>
+          <router-link to="/contact">Interested? Reach out!</router-link>
         </p>
       </div>
 
@@ -59,7 +59,7 @@
           I'm also quite fond of Vue, which is the framework I made this website in!
         </p>
         <p class="text-body-1">
-          Check out the <a href="/showcase">Showcase</a> and <a href="/blog">Blog</a> sections of the page to see some of my projects and technical dives!
+          Check out the <router-link to="/showcase">Showcase</router-link> and <router-link to="/blog">Blog</router-link> sections of the page to see some of my projects and technical dives!
         </p>
       </div>
     </div>
