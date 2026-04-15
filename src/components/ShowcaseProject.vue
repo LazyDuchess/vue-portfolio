@@ -2,7 +2,7 @@
   <v-card
     v-for="project in filteredProjects"
     :key="project.title"
-    class="mb-4 pa-4 d-flex"
+    class="mb-4 pa-4 d-flex list-item"
     hover
     :href="project.link"
     rel="noopener"

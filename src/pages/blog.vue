@@ -9,7 +9,7 @@
     <v-card
       v-for="post in posts"
       :key="post.slug"
-      class="mb-4 pa-4 d-flex"
+      class="mb-4 pa-4 d-flex list-item"
       hover
       rounded="xl"
       :to="'blog/'+post.slug"

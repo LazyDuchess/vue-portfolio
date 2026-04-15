@@ -4,7 +4,7 @@ description: Writing a custom morphing pipeline in Blender and Godot, in order t
 date: 2026-04-13
 thumbnail: blog/godotcompute/thumb.png
 seoimage: https://lazyduchess.online/blog/godotcompute/thumb.png
-category: C# GLSL Shaders Godot
+category: C# Godot GLSL Shaders
 ---
 
 # Compute Shaders for character customization
