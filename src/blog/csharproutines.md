@@ -4,7 +4,7 @@ description: Solving the problem of saving and loading coroutine state in C#, in
 date: 2026-04-12
 thumbnail: blog/csharp.png
 seoimage: https://lazyduchess.online/blog/csharp.png
-category: csharp
+category: C# Godot
 ---
 
 # Writing a custom C# routine scheduler and serializer
