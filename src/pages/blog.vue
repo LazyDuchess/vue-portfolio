@@ -14,6 +14,7 @@
       rounded="xl"
       :to="'blog/'+post.slug"
     >
+    <template v-if="$vuetify.display.smAndUp">
       <div class="d-flex align-center">
         <v-img
           v-if="post.thumbnail"
@@ -23,7 +24,8 @@
           width="128"
         />
       </div>
-      <div class="pa-4 d-flex flex-column justify-center align-start">
+      </template>
+      <div class="pa-4 d-flex flex-column justify-center align-start w-100">
         <v-card-title>{{ post.title }}</v-card-title>
         <v-card-subtitle>{{ new Date(post.date).toDateString() }}</v-card-subtitle>
         <v-card-text>{{ post.description }}</v-card-text>
@@ -62,6 +64,12 @@
 </script>
 
 <style>
+.v-card-title,
+.v-card-subtitle,
+.v-card-text {
+  white-space: normal;
+  word-break: break-word;
+}
 .category {
   color: rgb(88, 35, 68);
   outline: 2px solid rgb(122, 67, 101);

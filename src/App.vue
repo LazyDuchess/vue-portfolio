@@ -1,24 +1,28 @@
 <template>
   <v-app>
     <v-app-bar elevation="2">
+      <template v-if="!$vuetify.display.smAndUp" v-slot:prepend>
+        <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      </template>
       <v-app-bar-title class="font-weight-bold">
         {{ titleName }}{{ flashCursor ? "_" : "" }}
       </v-app-bar-title>
-
-      <div absolute class="center-wrapper">
-        <v-btn class="nav-btn" :ripple="false" to="/" variant="plain">Home
-          <span class="nav-underline" /></v-btn>
-        <v-btn class="nav-btn" :ripple="false" to="/showcase" variant="plain">Showcase
-          <span class="nav-underline" /></v-btn>
-        <v-btn
-          class="nav-btn"
-          :class="{ 'v-btn--active': $route.path.startsWith('/blog') }"
-          :ripple="false"
-          to="/blog"
-          variant="plain"
-        >Blog
-          <span class="nav-underline" /></v-btn>
-      </div>
+      <template v-if="$vuetify.display.smAndUp">
+        <div absolute class="center-wrapper">
+          <v-btn class="nav-btn" :ripple="false" to="/" variant="plain">Home
+            <span class="nav-underline" /></v-btn>
+          <v-btn class="nav-btn" :ripple="false" to="/showcase" variant="plain">Showcase
+            <span class="nav-underline" /></v-btn>
+          <v-btn
+            class="nav-btn"
+            :class="{ 'v-btn--active': $route.path.startsWith('/blog') }"
+            :ripple="false"
+            to="/blog"
+            variant="plain"
+          >Blog
+            <span class="nav-underline" /></v-btn>
+        </div>
+      </template>
     </v-app-bar>
     <v-main>
       <router-view />
@@ -74,27 +78,18 @@
 </template>
 
 <script lang="ts" setup>
-  import { useHead } from '@unhead/vue'
+  import { useHead, useSeoMeta } from '@unhead/vue'
   import { onMounted, ref } from 'vue'
 
   useHead({
-    bodyAttrs: {
-      // use strings
-      style: 'background-color: #343434',
-      // arrays
-      class: ['dark', 'overflow'],
-    },
-    htmlAttrs: {
-      // objects
-      style: {
-        backgroundColor: 'white',
-        color: 'black',
-      },
-      // computed boolean objects
-      class: {
-        dark: () => Date.now() % 2 === 0,
-      },
-    },
+    title: 'Nahuel - Portfolio',
+  })
+
+  useSeoMeta({
+    title: 'Nahuel - Portfolio',
+    description: 'Programming, reverse engineering and game development projects.',
+    ogTitle: 'Nahuel - Portfolio',
+    ogDescription: 'Programming, reverse engineering and game development projects.',
   })
 
   const title1 = 'Nahuel'
