@@ -1,0 +1,85 @@
+---
+title: Overhauling a 20 year old open world sandbox
+description: Setting up the stage for a multiplayer mod for Driver: Parallel Lines - By adding a completely new Lua virtual machine and reverse engineering its internals, plus implementing CI and automatic build artifacts on GitHub.
+date: 2026-04-16
+thumbnail: blog/dpl/thumb.png
+seoimage: https://lazyduchess.online/blog/dpl/thumb.png
+category: C++,Reverse Enginering,Lua,C#
+---
+
+# Overhauling a 20 year old open world sandbox
+
+## Introduction
+
+This is a little blog post on an ongoing project I'm working on with someone else. I thought it'd be cool to share some insight and some of my thought process when working on reverse engineering projects.
+
+So, some backstory:
+
+Driver: Parallel Lines is an open world crime sandbox released in 2006 - a GTA-like, basically. You get to steal cars, commit crimes, shoot at people, all that stuff. It's stuck with me, not so much because of it being a great game, I honestly think it's a decent game at best, but because it's a childhood classic to me - the first game I ever beat!
+
+It's always been a great target for patching and reverse engineering for me too, it was one of the first games I started hooking into and hacking seriously, alongside The Sims 2. I even toyed around with making a multiplayer mod for it some years ago, and had some success.
+
+Turns out a [very talented person who goes by BuilderDemo7 or BD7](https://github.com/BuilderDemo7) was also working on his own multiplayer mod, coincidentally at around the same time. In some ways, his project was further ahead, while mine also was in some other ways. After catching wind of this, I decided to contact him, and we agreed to collaborate, by restarting the project in a way that combined the best parts of both of our efforts and was structured with collaboration in mind from the beginning.
+
+## The Plan
+
+So, I was starting from scratch, but with a more thought out architectural plan for the mod.
+
+* Instead of having a DLL hook that loads everytime the game boots that reads server address and other settings from an .ini file, we'll have a WPF Launcher that you point your game installation to, and it automatically injects the mod and passes data like player name and server address directly to your game.
+
+* Completely decouple the mod from the main game installation - You should be able to play the game normally whenever you want to and play multiplayer whenever you want to, without polluting or messing with your game installation.
+
+* We would use Lua for scripting, this means creating custom Lua bindings and wrappers for the game's native classes, and writing a custom scheduler.
+
+* We would inject into the game's file loading code, to make a virtual filesystem where players and server owners can override game files without messing with your actual game installation.
+
+## Part 1: Boilerplate
+
+Starting out small, I created a simple WPF Launcher skeleton:
+
+![](/blog/dpl/launcher1.png)
+![](/blog/dpl/launcher1b.png)
+
+Very simple layout, with a few empty tabs except for Direct Connect and Settings for player name, game executable path and such. Good enough for now.
+
+Up next was sorting out the DLL injection itself. The idea was to look for a **DPLMPClient.dll** located alongside the Launcher executable, boot the game up using the path the user provided in the Settings tab - suspended, inject the DLL into the running process, then resume. Easy!
+
+What complicated it a little bit was Steam - BD7's original project didn't support that version as he had a GOG copy of the game. Steam doesn't let you just boot a game's exe willy nilly, attempting to do this basically makes the game executable close itself and signal Steam to execute and boot the game up in some magic Steam-friendly way instead, so doing it the regular way wouldn't really work, any injection would be lost.
+
+To get around this I implemented two paths for injection - One was the regular direct launch method, where the process would be launched suspended, injected, then resumed, and the other was the Steam method, where we directly ask Steam to launch the Driver AppID via shell execute, then wait in a loop for the Driver.exe process to pop up in the process list, then we inject and hope for the best:
+
+![](/blog/dpl/injectboth.png)
+
+For detecting which path to use I simply calculated a MD5 hash of the Steam exe and do the Steam launch if it matches, otherwise we do the regualr direct launch. It's not super elegant but as it is a 20 year old game an update is very unlikely:
+
+![](/blog/dpl/inject1.png)
+
+This basically gets our boilerplate done, we can now boot up the game from the launcher and it will inject a DLL that currently doesn't do anything, but it's a perfect entry point for what we want to do.
+
+# Part 2: Getting rid of everything
+
+I think that the first thing you want to achieve in a project like this is to boot the game up in a "sandbox" mode, without any story missions or objectives, and remove all systems that might get in the way like cops, traffic, pedestrians, etc.
+
+For the story part, a fun thing about this game is that the story "levels" are laid out in a plain text file:
+
+![](/blog/dpl/levels.png)
+
+It's worth nothing that this is **NOT** a game scripting file - You don't get granular things like objectives, spawn points, scripts, etc. It seems to be mostly a debug leftover, you basically just pick the era and the mission the level starts in. The game by default only uses the first 2 entries for loading the 2006 era and the 1978 era at the respective starting missions - forgot to mention, the game's story has a time jump.
+
+A very useful property of this file is that you can add a "ForceStart" line to any of the defined levels and the game will completely skip the main menu and load a new game in the chosen level. BD7 had actually figured out where in the game's executable code this happened, and so we can just hook into it and edit the return value to force us into any level ID:
+
+![](/blog/dpl/gfl.png)
+
+Also, lucky for us, a prototype PS2 build of this game was uploaded onto the internet some years ago. It has debug symbols, which means that we can look at class names, function names, and such, which is HUGE for projects like this.
+
+The disassembly output is a bit tricky as the PS2's CPU architecture is completely different from Intel x86 (What we use on Windows), but via context clues and cross referenceing you can pinpoint different functions. I use Ghidra for disassembling, which helps out a lot by also showing you a really rough decompilation side by side:
+
+![](/blog/dpl/ele.png)
+
+"LifeEvents" are essentially what the game calls scripts and missions. I'm not super familiar with these - but I don't need to be, as I just want to cancel them to let me roam around freely. It just so happens that there is an **EndAllLifeEvents()** function in the PS2 proto, so by matching known function calls and looking at similar code patterns and strings we are able to find the PC equivalent. We can call this on game start, and with our ForceLevel + EndAllLifeEvents hooks in place we end up with a freeroam mode:
+
+![](/blog/dpl/ingame1.png)
+
+An interesting side effect is that we end up with no pedestrians or traffic cars, except for cops. We know that the game uses a pool system where depending on which area you're in it will load and unload car and pedestrian models from memory buffers, and the traffic system pulls from those buffers to populate the city. This means that this pooling "zone" system is completely handled by the **LifeEvents** that we stopped, which is convenient.
+
+From here on out, it's a game of cat and mouse: We find things spawning that shouldn't, we track it down with Cheat Engine, see which code handles it and stub it out. Rinse and repeat.
