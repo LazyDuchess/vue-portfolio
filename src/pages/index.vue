@@ -7,11 +7,11 @@
         </h1>
 
         <p class="text-subtitle-1 text-medium-emphasis">
-          Programming, reverse engineering, and game development
+          C# Developer
         </p>
 
         <p class="text-body-2 mt-2">
-          <router-link to="/contact">Interested? Reach out!</router-link>
+          <router-link to="/contact">Looking for a developer? Reach out!</router-link>
         </p>
       </div>
 
@@ -21,46 +21,48 @@
         </h2>
 
         <p class="text-body-1">
-          Hi there! My name is Nahuel, I'm a programmer from Argentina. Ever since I was a kid I had dreams of developing my own games, and I was fascinated by the modding communities that formed around games like Half-Life, The Sims and Grand Theft Auto, and the things people managed to achieve in closed source games.
+          My name is Nahuel, I'm a programmer from Argentina focused on developing with C# and C++ with a strong background in game development, reverse engineering and networking.
         </p>
 
         <p class="text-body-1">
-          I'm very well known in the retro Sims (2 and 3) community for developing a variety of tools and fixes for longstanding issues with the games, by reverse engineering their internal engine code and injecting my own.<br>
-          My most recent project being <a href="https://github.com/LazyDuchess/TS2-Extender">TS2 Extender</a>, which fixes longstanding bugs in the newest re-release of The Sims 2 and implements a ton of new scripting features.
+          I'm well known for developing patches and tools for games like <i>The Sims 2</i> and <i>Dead Rising 2: Off The Record</i>, reverse engineering engine behavior to fix bugs, extend functionality and improve performance.
         </p>
 
         <p class="text-body-1">
-          It doesn't end with The Sims - I've also patched the PC port of Dead Rising 2: Off The Record, with <a href="https://github.com/LazyDuchess/OffTheRecordPatch">OffTheRecordPatch</a> as it is a quite buggy port. The patch implements proper controller support, fixes framerate dependent behavior and bugs, and adds other neat stuff like 60 FPS cutscenes.
+          More recently I've worked on <i>All City Network</i> - an MMO Multiplayer mod for Bomb Rush Cyberfunk, a game developed in the Unity Engine.
         </p>
 
         <p class="text-body-1">
-          On top of that, I'm quite fond of programming my own software, games, and whatever comes to mind. C# and C++ are two of my preferred languages, with Unity and Godot being my preferred game engines. I've even worked on an ongoing <a href="https://github.com/LazyDuchess/OpenTS2">Open Source reimplementation of The Sims 2 in Unity</a>, which has helped me immensely in getting better at programming, maintaining a collaborative codebase and testing software.
+          I'm currently expanding into full-stack web development, All City Network is getting a nice ASP.NET backend for player and crew auth and seeing player counts, and a nice Vue frontend to display it all. This portfolio was made using Vue.
         </p>
 
         <p class="text-body-1">
-          Nowadays, I've been getting more familiar with Godot, and learning a big deal about low level networking and server infrastructure with <a href="https://github.com/LazyDuchess/BombRushMP">All City Network</a>, an MMO multiplayer mod for Bomb Rush Cyberfunk.
+          Nowadays I'm learning Godot and fullstack development with Vue and ASP.NET.
         </p>
 
         <p class="text-body-1">
-          I made this website as well! I'm always looking to expand my horizons and try and learn new things.
+          Check out the <router-link to="/showcase">Showcase</router-link> and <router-link to="/blog">Blog</router-link> sections of the page to see some of my projects and technical dives!
         </p>
 
         <h2 class="text-h5 font-weight-medium mb-3">
           Skills
         </h2>
 
-        <p class="text-body-1">
-          C# is my main and preferred language, but I'm also quite strong in C++ and know a fair bit of Javascript and Typescript for frontend web development.
-        </p>
-        <p class="text-body-1">
-          I'm very familiar with Unity and Godot, and a bunch of useful software like Blender and GIMP for asset creation.
-        </p>
-        <p class="text-body-1">
-          I'm also quite fond of Vue, which is the framework I made this website in!
-        </p>
-        <p class="text-body-1">
-          Check out the <router-link to="/showcase">Showcase</router-link> and <router-link to="/blog">Blog</router-link> sections of the page to see some of my projects and technical dives!
-        </p>
+        <ul class="text-body-1 mb-4">
+          <li>C#, C++, ASP.NET Core</li>
+          <li>Networking (real-time client-server)</li>
+          <li>TypeScript and JavaScript</li>
+        </ul>
+
+        <h2 class="text-h5 font-weight-medium mb-3">
+          Tech
+        </h2>
+
+        <ul class="text-body-1">
+          <li>Unity and Godot for game development</li>
+          <li>Vue, Vuetify, Vite and ASP.NET for web apps</li>
+        </ul>
+
       </div>
     </div>
   </v-container>
