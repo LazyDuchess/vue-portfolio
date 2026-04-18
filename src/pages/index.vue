@@ -7,7 +7,7 @@
         </h1>
 
         <p class="text-subtitle-1 text-medium-emphasis">
-          C# Developer
+          C# Developer (ASP.NET Backend, networking and game development)
         </p>
 
         <p class="text-body-2 mt-2">
@@ -25,7 +25,7 @@
         </p>
 
         <p class="text-body-1">
-          I'm well known for developing patches and tools for games like <i>The Sims 2</i> and <i>Dead Rising 2: Off The Record</i>, reverse engineering engine behavior to fix bugs, extend functionality and improve performance.
+          I'm mostly known for developing patches and tools for games like <i>The Sims 2</i> and <i>Dead Rising 2: Off The Record</i>, reverse engineering engine behavior to fix bugs, extend functionality and improve performance.
         </p>
 
         <p class="text-body-1">
@@ -33,7 +33,7 @@
         </p>
 
         <p class="text-body-1">
-          I'm currently expanding into full-stack web development, All City Network is getting a nice ASP.NET backend for player and crew auth and seeing player counts, and a nice Vue frontend to display it all. This portfolio was made using Vue.
+          I'm currently expanding into full-stack web development, working on an ASP.NET backend for auth and player count for All City Network, with a Vue frontend. This portfolio was made using Vue.
         </p>
 
         <p class="text-body-1">
