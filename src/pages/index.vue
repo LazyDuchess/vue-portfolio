@@ -61,6 +61,8 @@
         <ul class="text-body-1">
           <li>Unity and Godot for game development</li>
           <li>Vue, Vuetify, Vite and ASP.NET for web apps</li>
+          <li>Git for version control</li>
+          <li>Testing and CI workflows</li>
         </ul>
 
       </div>
